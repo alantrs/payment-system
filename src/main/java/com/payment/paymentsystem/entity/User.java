@@ -28,8 +28,13 @@ public class User implements UserDetails {
     private String email;
     private String password;
     private Boolean enable;
-    private String verificationCode;
+    private Integer verificationCode;
 
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
