@@ -32,7 +32,6 @@ public class UserService {
 
         User user = new User(userRequest.name(), userRequest.email(), passwordEncoder.encode(userRequest.password()));
         user.setVerificationCode(code);
-        user.setEnable(false);
 
         User userSaved = userRepository.save(user);
         return new UserResponse(userSaved);

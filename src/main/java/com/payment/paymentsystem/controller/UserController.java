@@ -3,6 +3,7 @@ package com.payment.paymentsystem.controller;
 import com.payment.paymentsystem.dto.UserRequest;
 import com.payment.paymentsystem.dto.UserResponse;
 import com.payment.paymentsystem.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +22,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest user) {
+    public ResponseEntity<UserResponse> createUser(@Valid @RequestBody UserRequest user) {
         UserResponse userSaved = userService.createUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(userSaved);
     }
