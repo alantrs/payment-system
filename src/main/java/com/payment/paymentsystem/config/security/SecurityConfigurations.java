@@ -18,7 +18,7 @@ import static org.springframework.security.web.util.matcher.AntPathRequestMatche
 
 @Configuration
 @EnableWebSecurity
-public class SecutiryConfigurations {
+public class SecurityConfigurations {
 
     @Autowired
     SecurityFilter securityFilter;

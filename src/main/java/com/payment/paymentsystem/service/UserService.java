@@ -4,6 +4,7 @@ import com.payment.paymentsystem.config.exceptions.EmailExists;
 import com.payment.paymentsystem.dto.UserRequest;
 import com.payment.paymentsystem.dto.UserResponse;
 import com.payment.paymentsystem.entity.User;
+import com.payment.paymentsystem.entity.UserRole;
 import com.payment.paymentsystem.repository.UserRepository;
 import com.payment.paymentsystem.utils.RandomCode;
 import jakarta.mail.MessagingException;
@@ -35,7 +36,7 @@ public class UserService {
 
         int code = RandomCode.generateCode();
 
-        User user = new User(userRequest.name(), userRequest.email(), passwordEncoder.encode(userRequest.password()));
+        User user = new User(userRequest, passwordEncoder.encode(userRequest.password()));
         user.setVerificationCode(code);
 
         User userSaved = userRepository.save(user);
@@ -50,6 +51,7 @@ public class UserService {
         }
         user.setVerificationCode(null);
         user.setEnable(true);
+        user.setRole(UserRole.USER);
         userRepository.save(user);
         return true;
     }

@@ -1,6 +1,7 @@
 package com.payment.paymentsystem.entity;
 
 
+import com.payment.paymentsystem.dto.UserRequest;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,12 +30,15 @@ public class User implements UserDetails {
     private String password;
     private Boolean enable;
     private Integer verificationCode;
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 
-    public User(String name, String email, String password) {
-        this.name = name;
-        this.email = email;
+    public User(UserRequest dados, String password) {
+        this.name = dados.name();
+        this.email = dados.email();
         this.password = password;
         this.enable = false;
+        this.role = UserRole.AWAITING_VERIFICATION;
     }
 
     @Override
